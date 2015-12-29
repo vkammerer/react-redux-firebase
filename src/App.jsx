@@ -16,8 +16,7 @@ export class App extends Component {
       <Provider store={store}>
         <Router>
           <Route path="/" component={Wrapper}>
-            <IndexRoute />
-            <Route path="articles" component={Articles} />
+            <IndexRoute component={Articles} />
           </Route>
     		</Router>
     	</Provider>
