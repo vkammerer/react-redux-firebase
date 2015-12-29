@@ -16,4 +16,5 @@ const logger = (store) => (next) => (action) => {
 	return result
 }
 
-export default applyMiddleware(thunk,logger)(createStore)(rootReducer,initialState);
+const createStoreWithMiddleware = applyMiddleware(thunk, logger)(createStore)
+export default createStoreWithMiddleware(rootReducer,initialState);

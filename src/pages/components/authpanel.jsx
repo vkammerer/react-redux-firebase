@@ -19,7 +19,6 @@ class Authpanel extends Component {
 	render() {
 		let p = this.props;
 		let authContent;
-		console.log(p.auth);
 		switch(p.auth.currently){
 			case C.LOGGED_IN: return(
 				<div className='authpanel'>
