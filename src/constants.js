@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	// MISC
 	FIREBASE: 'https://brilliant-inferno-6675.firebaseio.com',
 
