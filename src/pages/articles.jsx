@@ -17,23 +17,26 @@ export default class Articles extends Component {
 	}
 	render() {
 		const p = this.props;
-		const rows = Object.keys(p.articles.data).map((qid) => {
-			const article = p.articles.data[qid];
-			const articlestate = p.articles.states[qid];
-			return (
-				<Article
-					key={qid}
-					article={article}
-					qid={qid}
-					state={articlestate}
-					edit={p.startEdit.bind(this, qid)}
-					cancel={p.cancelEdit.bind(this, qid)}
-					submit={p.submitEdit.bind(this, qid)}
-					delete={p.deleteArticle.bind(this, qid)}
-					mayedit={p.auth.uid === article.uid}
-				/>
-			);
-		});
+		let rows = [];
+		if (p.articles.data) {
+			rows = Object.keys(p.articles.data).map((qid) => {
+				const article = p.articles.data[qid];
+				const articlestate = p.articles.states[qid];
+				return (
+					<Article
+						key={qid}
+						article={article}
+						qid={qid}
+						state={articlestate}
+						edit={p.startEdit.bind(this, qid)}
+						cancel={p.cancelEdit.bind(this, qid)}
+						submit={p.submitEdit.bind(this, qid)}
+						delete={p.deleteArticle.bind(this, qid)}
+						mayedit={p.auth.uid === article.uid}
+					/>
+				);
+			});
+		}
 		return (
 			<div className="articleslist">
 				{p.auth.uid ? <form onSubmit={this.newArticle}>
