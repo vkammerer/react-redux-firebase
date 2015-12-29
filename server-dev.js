@@ -7,15 +7,18 @@ const app = express();
 const compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath
+	stats: {
+		chunks: false,
+		colors: true
+	},
+	publicPath: config.output.publicPath
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.use(express.static('static'));
 
-app.get('*', function(req, res) {
+app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'static', 'index.html'));
 });
 

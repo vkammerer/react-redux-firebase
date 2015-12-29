@@ -8,15 +8,15 @@ import Authpanel from './components/authpanel';
 import Feedbackpanel from './components/feedbackpanel';
 
 export default class Wrapper extends Component {
-  render() {
-    return (
-      <div className="wrapper">
-        <Authpanel />
-        <div className="center">
-          <Feedbackpanel />
-          {this.props.children}
-        </div>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="wrapper">
+				<Authpanel />
+				<div className="center">
+					<Feedbackpanel />
+					{this.props.children}
+				</div>
+			</div>
+		);
+	}
 }

@@ -1,8 +1,8 @@
 import C from '../constants';
 
 const feedbackActions = {
-	dismissFeedback(num){
-		return {type:C.DISMISS_FEEDBACK,num};
+	dismissFeedback(num) {
+		return { type: C.DISMISS_FEEDBACK, num };
 	}
 };
 

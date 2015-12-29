@@ -1,8 +1,8 @@
 import C from '../../constants';
 import initialState from '../initialstate';
 
-export default (currentstate,action) => {
-	switch(action.type){
+export default (currentstate, action) => {
+	switch (action.type) {
 		case C.ATTEMPTING_LOGIN:
 			return {
 				currently: C.AWAITING_AUTH_RESPONSE,

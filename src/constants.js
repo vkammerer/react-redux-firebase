@@ -1,7 +1,3 @@
-/*
-This file contains all would-be-magic-strings in the app.
-*/
-
 module.exports = {
 	// MISC
 	FIREBASE: 'https://brilliant-inferno-6675.firebaseio.com',

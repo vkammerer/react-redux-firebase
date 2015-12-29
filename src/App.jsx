@@ -7,19 +7,19 @@ import Wrapper from './pages/wrapper';
 import Articles from './pages/articles';
 
 export class App extends Component {
-  componentWillMount(){
-    store.dispatch( actions.startListeningToAuth() );
-    store.dispatch( actions.startListeningToArticles() );
-  }
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <Route path="/" component={Wrapper}>
-            <IndexRoute component={Articles} />
-          </Route>
-    		</Router>
-    	</Provider>
-    );
-  }
+	componentWillMount() {
+		store.dispatch(actions.startListeningToAuth());
+		store.dispatch(actions.startListeningToArticles());
+	}
+	render() {
+		return (
+			<Provider store={store}>
+				<Router>
+					<Route path="/" component={Wrapper}>
+						<IndexRoute component={Articles} />
+					</Route>
+				</Router>
+			</Provider>
+		);
+	}
 }
