@@ -1,10 +1,10 @@
 {
-  "parser": "babel-eslint",
   "extends": "airbnb",
   "rules": {
-    "no-console": 0,
-    "indent": [2, "tab", {"SwitchCase": 1}],
+    "arrow-body-style": [0],
     "comma-dangle": 0,
+    "indent": [2, "tab", {"SwitchCase": 1}],
+    "no-console": 0,
     "react/prop-types": 0,
     "react/jsx-indent-props": [2, "tab"]
   }

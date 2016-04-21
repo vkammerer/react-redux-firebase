@@ -1,12 +1,11 @@
-import { combineReducers } from 'redux';
 import articles from './articles';
 import auth from './auth';
 import feedback from './feedback';
+import firebase from './firebase';
 
-const rootReducer = combineReducers({
+export default Object.assign({},
 	articles,
 	auth,
 	feedback,
-});
-
-export default rootReducer;
+	firebase
+);

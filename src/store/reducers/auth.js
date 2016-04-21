@@ -1,26 +1,31 @@
 import C from '../../constants';
-import initialState from '../initialstate';
 
-export default (currentstate, action) => {
+const initialState = {
+	username: null,
+	uid: null,
+	status: C.AUTH_ANONYMOUS,
+};
+
+export default (state, action) => {
 	switch (action.type) {
-		case C.ATTEMPTING_LOGIN:
+		case C.AUTH_OPEN:
 			return {
-				currently: C.AWAITING_AUTH_RESPONSE,
+				status: C.AUTH_AWAITING_RESPONSE,
 				username: 'guest',
 				uid: null
 			};
-		case C.LOGOUT:
+		case C.AUTH_LOGIN:
 			return {
-				currently: C.ANONYMOUS,
-				username: 'guest',
-				uid: null
-			};
-		case C.LOGIN_USER:
-			return {
-				currently: C.LOGGED_IN,
+				status: C.AUTH_LOGGED_IN,
 				username: action.username,
 				uid: action.uid
 			};
-		default: return currentstate || initialState.auth;
+		case C.AUTH_LOGOUT:
+			return {
+				status: C.AUTH_ANONYMOUS,
+				username: 'guest',
+				uid: null
+			};
+		default: return state || initialState;
 	}
 };

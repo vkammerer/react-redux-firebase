@@ -10,11 +10,16 @@ export default {
 	output: {
 		path: path.join(__dirname, 'static', 'scripts'),
 		filename: 'bundle.js',
-		publicPath: '/scripts/'
+		publicPath: '/'
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin()
+		new webpack.NoErrorsPlugin(),
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: JSON.stringify('development')
+			}
+		}),
 	],
 	resolve: {
 		extensions: ['', '.js', '.jsx']
@@ -23,13 +28,11 @@ export default {
 		configFile: '.eslintrc'
 	},
 	module: {
-		preLoaders: [
-			{
-				test: /\.js|\.jsx$/,
-				loader: 'eslint-loader',
-				exclude: ['node_modules']
-			}
-		],
+		preLoaders: [{
+			test: /\.js|\.jsx$/,
+			loaders: ['eslint-loader'],
+			exclude: ['node_modules']
+		}],
 		loaders: [{
 			test: /\.js|\.jsx$/,
 			loaders: ['babel'],

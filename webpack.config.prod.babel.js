@@ -7,7 +7,7 @@ export default {
 		'./src/index'
 	],
 	output: {
-		path: path.join(__dirname, 'static', 'scripts'),
+		path: path.join(__dirname, 'static'),
 		filename: 'bundle.js',
 		publicPath: ''
 	},
@@ -15,7 +15,7 @@ export default {
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.DefinePlugin({
 			'process.env': {
-				'NODE_ENV': JSON.stringify('production')
+				NODE_ENV: JSON.stringify('production')
 			}
 		}),
 		new webpack.optimize.UglifyJsPlugin({
@@ -31,13 +31,11 @@ export default {
 		configFile: '.eslintrc'
 	},
 	module: {
-		preLoaders: [
-			{
-				test: /\.js|\.jsx$/,
-				loader: 'eslint-loader',
-				exclude: ['node_modules']
-			}
-		],
+		preLoaders: [{
+			test: /\.js|\.jsx$/,
+			loaders: ['eslint-loader'],
+			exclude: ['node_modules']
+		}],
 		loaders: [{
 			test: /\.js|\.jsx$/,
 			loaders: ['babel'],

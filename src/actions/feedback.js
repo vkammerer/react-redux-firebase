@@ -1,9 +1,7 @@
 import C from '../constants';
 
-const feedbackActions = {
-	dismissFeedback(num) {
-		return { type: C.DISMISS_FEEDBACK, num };
-	}
+export const dismissFeedback = (num) => {
+	return (dispatch) => {
+		dispatch({ type: C.FEEDBACK_DISMISS, num });
+	};
 };
-
-export default feedbackActions;
