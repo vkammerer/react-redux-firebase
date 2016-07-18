@@ -17,7 +17,7 @@ export const listenToAuth = () => {
 
 				// reload articles on auth update.
 				const listenToArticlesDispatcher = listenToArticles();
-				listenToArticlesDispatcher(dispatch);
+				listenToArticlesDispatcher(dispatch, getState);
 			} else {
 				if (getState().auth.status !== C.AUTH_ANONYMOUS) {
 					dispatch({ type: C.AUTH_LOGOUT });
@@ -27,7 +27,6 @@ export const listenToAuth = () => {
 	};
 };
 
-// rob hack - switch to google.
 export const openAuth = () => {
 	return (dispatch) => {
 		dispatch({ type: C.AUTH_OPEN });
