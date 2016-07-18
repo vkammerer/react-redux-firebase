@@ -63,10 +63,17 @@ class Articles extends Component {
 		} else {
 			content = <p>Log in to add a new article of your own!</p>;
 		}
+		/* this.props.articles.hasReceivedData ? rows : 'Loading articles...' */
+		const rowsOrLoading = this.props.articles.hasReceivedData
+			? rows
+			: 'Loading articles...';
 		return (
 			<div>
 				{content}
-				{this.props.articles.hasReceivedData ? rows : 'Loading articles...'}
+				{this.props.articles.errorMessage
+					? <p>{this.props.articles.errorMessage}</p>
+					: rowsOrLoading
+				}
 			</div>
 		);
 	}

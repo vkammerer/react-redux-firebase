@@ -1,17 +1,23 @@
+import * as firebase from 'firebase';
 import C from '../constants';
-import Firebase from 'firebase';
+import { auth } from '../firebaseApp';
 
-const fireRef = new Firebase(C.FIREBASE_URI);
+import { listenToArticles } from './articles';
 
 export const listenToAuth = () => {
 	return (dispatch, getState) => {
-		fireRef.onAuth((authData) => {
+		auth.onAuthStateChanged((authData) => {
+			console.log('onAuthStateChanged', authData);
 			if (authData) {
 				dispatch({
 					type: C.AUTH_LOGIN,
 					uid: authData.uid,
-					username: authData.facebook.displayName || authData.facebook.username
+					username: authData.displayName
 				});
+
+				// reload articles on auth update.
+				const listenToArticlesDispatcher = listenToArticles();
+				listenToArticlesDispatcher(dispatch);
 			} else {
 				if (getState().auth.status !== C.AUTH_ANONYMOUS) {
 					dispatch({ type: C.AUTH_LOGOUT });
@@ -21,21 +27,25 @@ export const listenToAuth = () => {
 	};
 };
 
+// rob hack - switch to google.
 export const openAuth = () => {
 	return (dispatch) => {
 		dispatch({ type: C.AUTH_OPEN });
-		fireRef.authWithOAuthPopup('facebook', (error) => {
-			if (error) {
-				dispatch({ type: C.FEEDBACK_DISPLAY_ERROR, error: `Login failed! ${error}` });
+		const provider = new firebase.auth.GoogleAuthProvider();
+		auth.signInWithPopup(provider)
+			.catch((error) => {
+				dispatch({
+					type: C.FEEDBACK_DISPLAY_ERROR,
+					error: `Login failed! ${error}`
+				});
 				dispatch({ type: C.AUTH_LOGOUT });
-			}
-		});
+			});
 	};
 };
 
 export const logoutUser = () => {
 	return (dispatch) => {
 		dispatch({ type: C.AUTH_LOGOUT });
-		fireRef.unauth();
+		auth.signOut();
 	};
 };

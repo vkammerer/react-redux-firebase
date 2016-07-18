@@ -3,6 +3,7 @@ import C from '../../constants';
 const initialState = {
 	hasReceivedData: false,
 	submittingNew: false,
+	errorMessage: '',
 	data: {},
 	status: {},
 };
@@ -13,7 +14,13 @@ export default (state, action) => {
 		case C.ARTICLES_RECEIVE_DATA:
 			return Object.assign({}, state, {
 				hasReceivedData: true,
-				data: action.data
+				data: action.data,
+				errorMessage: ''
+			});
+		case C.ARTICLES_RECEIVE_DATA_ERROR:
+			return Object.assign({}, state, {
+				data: null,
+				errorMessage: action.message
 			});
 		case C.ARTICLE_AWAIT_CREATION_RESPONSE:
 			return Object.assign({}, state, {

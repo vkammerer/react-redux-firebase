@@ -1,12 +1,22 @@
 import C from '../constants';
-import Firebase from 'firebase';
+import { database } from '../firebaseApp';
 
-const articlesRef = new Firebase(C.FIREBASE_URI).child('articles');
+const articlesRef = database.ref('articles');
+console.log('articlesRef', articlesRef);
 
 export const listenToArticles = () => {
 	return (dispatch) => {
+		articlesRef.off();
 		articlesRef.on('value', (snapshot) => {
-			dispatch({ type: C.ARTICLES_RECEIVE_DATA, data: snapshot.val() });
+			dispatch({
+				type: C.ARTICLES_RECEIVE_DATA,
+				data: snapshot.val()
+			});
+		}, (error) => {
+			dispatch({
+				type: C.ARTICLES_RECEIVE_DATA_ERROR,
+				message: error.message
+			});
 		});
 	};
 };
@@ -23,7 +33,10 @@ export const submitArticle = (content) => {
 		articlesRef.push(article, (error) => {
 			dispatch({ type: C.ARTICLE_RECEIVE_CREATION_RESPONSE });
 			if (error) {
-				dispatch({ type: C.FEEDBACK_DISPLAY_ERROR, error: `Submission failed! ${error}` });
+				dispatch({
+					type: C.FEEDBACK_DISPLAY_ERROR,
+					error: `Submission failed! ${error}`
+				});
 			} else {
 				dispatch({
 					type: C.FEEDBACK_DISPLAY_MESSAGE,
@@ -58,22 +71,35 @@ export const submitArticleEdit = (qid, content) => {
 		articlesRef.child(qid).set(article, (error) => {
 			dispatch({ type: C.ARTICLE_EDIT_FINISH, qid });
 			if (error) {
-				dispatch({ type: C.FEEDBACK_DISPLAY_ERROR, error: `Update failed! ${error}` });
+				dispatch({
+					type: C.FEEDBACK_DISPLAY_ERROR,
+					error: `Update failed! ${error}`
+				});
 			} else {
-				dispatch({ type: C.FEEDBACK_DISPLAY_MESSAGE, message: 'Update successfully saved!' });
+				dispatch({
+					type: C.FEEDBACK_DISPLAY_MESSAGE,
+					message: 'Update successfully saved!'
+				});
 			}
 		});
 	};
 };
+
 export const deleteArticle = (qid) => {
 	return (dispatch) => {
 		dispatch({ type: C.ARTICLE_EDIT_SUBMIT, qid });
 		articlesRef.child(qid).remove((error) => {
 			dispatch({ type: C.ARTICLE_EDIT_FINISH, qid });
 			if (error) {
-				dispatch({ type: C.FEEDBACK_DISPLAY_ERROR, error: `Deletion failed! ${error}` });
+				dispatch({
+					type: C.FEEDBACK_DISPLAY_ERROR,
+					error: `Deletion failed! ${error}`
+				});
 			} else {
-				dispatch({ type: C.FEEDBACK_DISPLAY_MESSAGE, message: 'Article successfully deleted!' });
+				dispatch({
+					type: C.FEEDBACK_DISPLAY_MESSAGE,
+					message: 'Article successfully deleted!'
+				});
 			}
 		});
 	};
