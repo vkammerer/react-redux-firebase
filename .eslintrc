@@ -6,6 +6,7 @@
     "indent": [2, "tab", {"SwitchCase": 1}],
     "no-console": 0,
     "react/prop-types": 0,
-    "react/jsx-indent-props": [2, "tab"]
+    "react/jsx-indent-props": [2, "tab"],
+    "react/jsx-indent": [2, "tab"]
   }
 }

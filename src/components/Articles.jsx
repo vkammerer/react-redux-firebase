@@ -29,10 +29,12 @@ class Articles extends Component {
 			rows = Object.keys(this.props.articles.data).map((qid) => {
 				const article = this.props.articles.data[qid];
 				const status = this.props.articles.status[qid];
+				/* eslint-disable react/jsx-no-bind */
 				const thisStartArticleEdit = this.props.startArticleEdit.bind(this, qid);
 				const thisCancelArticleEdit = this.props.cancelArticleEdit.bind(this, qid);
 				const thisSubmitArticleEdit = this.props.submitArticleEdit.bind(this, qid);
 				const thisDeleteArticle = this.props.deleteArticle.bind(this, qid);
+				/* eslint-enable react/jsx-no-bind */
 				return (
 					<Article
 						key={qid}
