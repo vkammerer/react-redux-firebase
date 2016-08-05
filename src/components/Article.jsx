@@ -37,7 +37,7 @@ class Article extends Component {
 		return (
 			<div>
 				<span>{`${this.props.article.username} said:`}</span>
-				{this.props.article.content} { button }
+				{this.props.article.content} {button}
 			</div>
 		);
 	}
