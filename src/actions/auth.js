@@ -29,7 +29,7 @@ export const listenToAuth = () => {
 export const openAuth = () => {
 	return (dispatch) => {
 		dispatch({ type: C.AUTH_OPEN });
-		const provider = new firebase.auth.GoogleAuthProvider();
+		const provider = new firebase.auth.FacebookAuthProvider();
 		auth.signInWithPopup(provider)
 			.catch((error) => {
 				dispatch({
