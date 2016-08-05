@@ -2,7 +2,6 @@ import C from '../constants';
 import { database } from '../firebaseApp';
 
 const articlesRef = database.ref('articles');
-console.log('articlesRef', articlesRef);
 
 export const listenToArticles = () => {
 	return (dispatch) => {

@@ -7,7 +7,6 @@ import { listenToArticles } from './articles';
 export const listenToAuth = () => {
 	return (dispatch, getState) => {
 		auth.onAuthStateChanged((authData) => {
-			console.log('onAuthStateChanged', authData);
 			if (authData) {
 				dispatch({
 					type: C.AUTH_LOGIN,

@@ -1,8 +1,8 @@
 export default {
 	firebaseConfig: {
-		apiKey: 'AIzaSyDbIlMLmJ00N_0dVQGAGXIxGRUWsaGiKC8',
-		authDomain: 'test1-1681f.firebaseapp.com',
-		databaseURL: 'https://test1-1681f.firebaseio.com',
-		storageBucket: 'test1-1681f.appspot.com'
+		apiKey: "AIzaSyCHvJ-2m_Cn_JqUxXmwqvqy9b-6FbsYtEI",
+		authDomain: "brilliant-inferno-6675.firebaseapp.com",
+		databaseURL: "https://brilliant-inferno-6675.firebaseio.com",
+		storageBucket: "brilliant-inferno-6675.appspot.com",
 	}
 };
