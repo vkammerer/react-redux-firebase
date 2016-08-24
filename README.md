@@ -22,5 +22,8 @@ Build the production version of your assets in the 'static' directory
 npm run build
 ```
 # TODO
-Replace redux-thunk with redux-saga. If anyone if up for sending a PR, I would gladly review it and merge it.
+- Replace redux-thunk with redux-saga.  
+- Replace custom express server with webpack-dev-server.  
+
+If anyone if up for sending a PR, I would gladly review it and merge it.
 
