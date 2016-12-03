@@ -11,7 +11,7 @@ export const listenToAuth = () => {
 				dispatch({
 					type: C.AUTH_LOGIN,
 					uid: authData.uid,
-					username: authData.displayName
+					username: authData.providerData[0].displayName,
 				});
 
 				// reload articles on auth update.
