@@ -12,18 +12,12 @@ Clone the repo and then:
 npm i
 ```  
 ## Dev
-Run an express server using Webpack with Hot Module Replacement:
+Run with webpack dev server:
 ```javascript
 npm run dev
-```
+```  
 ## Prod
-Build the production version of your assets in the 'static' directory
+Build the production version:
 ```javascript
-npm run build
-```
-# TODO
-- Replace redux-thunk with redux-saga.  
-- Replace custom express server with webpack-dev-server.  
-
-If anyone if up for sending a PR, I would gladly review it and merge it.
-
+npm run prod
+```  
