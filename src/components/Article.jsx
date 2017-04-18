@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import C from '../constants';
 
 class Article extends Component {
-	constructor() {
-		super();
-		this.submit = this.submit.bind(this);
-	}
-	submit(e) {
+	submit = e => {
 		e.preventDefault();
 		this.props.submitArticleEdit(this.refs.article.value);
 		this.refs.article.value = '';

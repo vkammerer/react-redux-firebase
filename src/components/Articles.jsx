@@ -10,11 +10,7 @@ import {
 import Article from './Article';
 
 class Articles extends Component {
-	constructor() {
-		super();
-		this.submitNewArticle = this.submitNewArticle.bind(this);
-	}
-	submitNewArticle(e) {
+	submitNewArticle = e => {
 		if (!this.props.articles.submitting) {
 			e.preventDefault();
 			if (this.refs.newArticle.value) {
@@ -29,12 +25,10 @@ class Articles extends Component {
 			rows = Object.keys(this.props.articles.data).map((qid) => {
 				const article = this.props.articles.data[qid];
 				const status = this.props.articles.status[qid];
-				/* eslint-disable react/jsx-no-bind */
-				const thisStartArticleEdit = this.props.startArticleEdit.bind(this, qid);
-				const thisCancelArticleEdit = this.props.cancelArticleEdit.bind(this, qid);
-				const thisSubmitArticleEdit = this.props.submitArticleEdit.bind(this, qid);
-				const thisDeleteArticle = this.props.deleteArticle.bind(this, qid);
-				/* eslint-enable react/jsx-no-bind */
+				const thisStartArticleEdit = () => this.props.startArticleEdit(qid);
+				const thisCancelArticleEdit = () => this.props.cancelArticleEdit(qid);
+				const thisSubmitArticleEdit = (value) => this.props.submitArticleEdit(qid, value);
+				const thisDeleteArticle = () => this.props.deleteArticle(qid);
 				return (
 					<Article
 						key={qid}
@@ -65,7 +59,6 @@ class Articles extends Component {
 		} else {
 			content = <p>Log in to add a new article of your own!</p>;
 		}
-		/* this.props.articles.hasReceivedData ? rows : 'Loading articles...' */
 		const rowsOrLoading = this.props.articles.hasReceivedData
 			? rows
 			: 'Loading articles...';
@@ -81,12 +74,10 @@ class Articles extends Component {
 	}
 }
 
-const mapStateToProps = (state) => {
-	return {
-		articles: state.articles,
-		auth: state.auth
-	};
-};
+const mapStateToProps = state => ({
+	articles: state.articles,
+	auth: state.auth
+});
 
 const mapDispatchToProps = {
 	submitArticle,

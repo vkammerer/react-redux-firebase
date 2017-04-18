@@ -12,7 +12,7 @@ Clone the repo and then:
 npm i
 ```  
 ## Dev
-Run with webpack dev server:
+Run webpack dev server:
 ```javascript
 npm run dev
 ```  

@@ -9,39 +9,43 @@ const initialState = {
 };
 
 export default (state, action) => {
-	let newstate;
+	let newState;
 	switch (action.type) {
 		case C.ARTICLES_RECEIVE_DATA:
-			return Object.assign({}, state, {
+			return {
+				...state,
 				hasReceivedData: true,
 				data: action.data,
 				errorMessage: ''
-			});
+			};
 		case C.ARTICLES_RECEIVE_DATA_ERROR:
-			return Object.assign({}, state, {
+			return {
+				...state,
 				data: null,
 				errorMessage: action.message
-			});
+			};
 		case C.ARTICLE_AWAIT_CREATION_RESPONSE:
-			return Object.assign({}, state, {
+			return {
+				...state,
 				submittingNew: true
-			});
+			};
 		case C.ARTICLE_RECEIVE_CREATION_RESPONSE:
-			return Object.assign({}, state, {
+			return {
+				...state,
 				submittingNew: false
-			});
+			};
 		case C.ARTICLE_EDIT:
-			newstate = Object.assign({}, state);
-			newstate.status[action.qid] = C.ARTICLE_EDITING;
-			return newstate;
+			newState = { ...state };
+			newState.status[action.qid] = C.ARTICLE_EDITING;
+			return newState;
 		case C.ARTICLE_EDIT_FINISH:
-			newstate = Object.assign({}, state);
-			delete newstate.status[action.qid];
-			return newstate;
+			newState = { ...state };
+			delete newState.status[action.qid];
+			return newState;
 		case C.ARTICLE_EDIT_SUBMIT:
-			newstate = Object.assign({}, state);
-			newstate.status[action.qid] = C.ARTICLE_SUBMITTING;
-			return newstate;
+			newState = { ...state };
+			newState.status[action.qid] = C.ARTICLE_SUBMITTING;
+			return newState;
 		default: return state || initialState;
 	}
 };
