@@ -6,15 +6,15 @@ import { listenToArticles } from './actions/articles';
 import Page from './components/Page';
 
 export class App extends Component {
-	componentWillMount() {
-		store.dispatch(listenToAuth());
-		store.dispatch(listenToArticles());
-	}
-	render() {
-		return (
-			<Provider store={store}>
-				<Page />
-			</Provider>
-		);
-	}
+  componentWillMount() {
+    store.dispatch(listenToAuth());
+    store.dispatch(listenToArticles());
+  }
+  render() {
+    return (
+      <Provider store={store}>
+        <Page />
+      </Provider>
+    );
+  }
 }

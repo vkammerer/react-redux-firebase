@@ -4,8 +4,8 @@ import feedback from './feedback';
 import firebase from './firebase';
 
 export default {
-	...articles,
-	...auth,
-	...feedback,
-	...firebase
+  ...articles,
+  ...auth,
+  ...feedback,
+  ...firebase
 };
