@@ -10392,22 +10392,28 @@ var Article = function (_Component) {
 	_inherits(Article, _Component);
 
 	function Article() {
+		var _ref;
+
+		var _temp, _this, _ret;
+
 		_classCallCheck(this, Article);
 
-		var _this = _possibleConstructorReturn(this, (Article.__proto__ || Object.getPrototypeOf(Article)).call(this));
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
 
-		_this.submit = _this.submit.bind(_this);
-		return _this;
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Article.__proto__ || Object.getPrototypeOf(Article)).call.apply(_ref, [this].concat(args))), _this), Object.defineProperty(_this, 'submit', {
+			enumerable: true,
+			writable: true,
+			value: function value(e) {
+				e.preventDefault();
+				_this.props.submitArticleEdit(_this.refs.article.value);
+				_this.refs.article.value = '';
+			}
+		}), _temp), _possibleConstructorReturn(_this, _ret);
 	}
 
 	_createClass(Article, [{
-		key: 'submit',
-		value: function submit(e) {
-			e.preventDefault();
-			this.props.submitArticleEdit(this.refs.article.value);
-			this.refs.article.value = '';
-		}
-	}, {
 		key: 'render',
 		value: function render() {
 			var button = void 0;
@@ -10509,26 +10515,32 @@ var Articles = function (_Component) {
 	_inherits(Articles, _Component);
 
 	function Articles() {
+		var _ref;
+
+		var _temp, _this, _ret;
+
 		_classCallCheck(this, Articles);
 
-		var _this = _possibleConstructorReturn(this, (Articles.__proto__ || Object.getPrototypeOf(Articles)).call(this));
+		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+			args[_key] = arguments[_key];
+		}
 
-		_this.submitNewArticle = _this.submitNewArticle.bind(_this);
-		return _this;
+		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Articles.__proto__ || Object.getPrototypeOf(Articles)).call.apply(_ref, [this].concat(args))), _this), Object.defineProperty(_this, 'submitNewArticle', {
+			enumerable: true,
+			writable: true,
+			value: function value(e) {
+				if (!_this.props.articles.submitting) {
+					e.preventDefault();
+					if (_this.refs.newArticle.value) {
+						_this.props.submitArticle(_this.refs.newArticle.value);
+					}
+					_this.refs.newArticle.value = '';
+				}
+			}
+		}), _temp), _possibleConstructorReturn(_this, _ret);
 	}
 
 	_createClass(Articles, [{
-		key: 'submitNewArticle',
-		value: function submitNewArticle(e) {
-			if (!this.props.articles.submitting) {
-				e.preventDefault();
-				if (this.refs.newArticle.value) {
-					this.props.submitArticle(this.refs.newArticle.value);
-				}
-				this.refs.newArticle.value = '';
-			}
-		}
-	}, {
 		key: 'render',
 		value: function render() {
 			var _this2 = this;
@@ -10538,12 +10550,18 @@ var Articles = function (_Component) {
 				rows = Object.keys(this.props.articles.data).map(function (qid) {
 					var article = _this2.props.articles.data[qid];
 					var status = _this2.props.articles.status[qid];
-					/* eslint-disable react/jsx-no-bind */
-					var thisStartArticleEdit = _this2.props.startArticleEdit.bind(_this2, qid);
-					var thisCancelArticleEdit = _this2.props.cancelArticleEdit.bind(_this2, qid);
-					var thisSubmitArticleEdit = _this2.props.submitArticleEdit.bind(_this2, qid);
-					var thisDeleteArticle = _this2.props.deleteArticle.bind(_this2, qid);
-					/* eslint-enable react/jsx-no-bind */
+					var thisStartArticleEdit = function thisStartArticleEdit() {
+						return _this2.props.startArticleEdit(qid);
+					};
+					var thisCancelArticleEdit = function thisCancelArticleEdit() {
+						return _this2.props.cancelArticleEdit(qid);
+					};
+					var thisSubmitArticleEdit = function thisSubmitArticleEdit(value) {
+						return _this2.props.submitArticleEdit(qid, value);
+					};
+					var thisDeleteArticle = function thisDeleteArticle() {
+						return _this2.props.deleteArticle(qid);
+					};
 					return _react2.default.createElement(_Article2.default, {
 						key: qid,
 						qid: qid,
@@ -10580,7 +10598,6 @@ var Articles = function (_Component) {
 					'Log in to add a new article of your own!'
 				);
 			}
-			/* this.props.articles.hasReceivedData ? rows : 'Loading articles...' */
 			var rowsOrLoading = this.props.articles.hasReceivedData ? rows : 'Loading articles...';
 			return _react2.default.createElement(
 				'div',
@@ -10626,8 +10643,6 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
@@ -10642,74 +10657,48 @@ var _constants2 = _interopRequireDefault(_constants);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Auth = function (_Component) {
-	_inherits(Auth, _Component);
-
-	function Auth() {
-		_classCallCheck(this, Auth);
-
-		return _possibleConstructorReturn(this, (Auth.__proto__ || Object.getPrototypeOf(Auth)).apply(this, arguments));
+var Auth = function Auth(props) {
+	switch (props.auth.status) {
+		case _constants2.default.AUTH_LOGGED_IN:
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'span',
+					null,
+					'Logged in as ',
+					props.auth.username,
+					'.'
+				),
+				" ",
+				_react2.default.createElement(
+					'button',
+					{ onClick: props.logoutUser },
+					'Log out'
+				)
+			);
+		case _constants2.default.AUTH_AWAITING_RESPONSE:
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'button',
+					{ disabled: true },
+					'authenticating...'
+				)
+			);
+		default:
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'button',
+					{ onClick: props.openAuth },
+					'Log in'
+				)
+			);
 	}
-
-	_createClass(Auth, [{
-		key: 'getJSX',
-		value: function getJSX(props) {
-			switch (props.auth.status) {
-				case _constants2.default.AUTH_LOGGED_IN:
-					return _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'span',
-							null,
-							'Logged in as ',
-							props.auth.username,
-							'.'
-						),
-						" ",
-						_react2.default.createElement(
-							'button',
-							{ onClick: props.logoutUser },
-							'Log out'
-						)
-					);
-				case _constants2.default.AUTH_AWAITING_RESPONSE:
-					return _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'button',
-							{ disabled: true },
-							'authenticating...'
-						)
-					);
-				default:
-					return _react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(
-							'button',
-							{ onClick: props.openAuth },
-							'Log in'
-						)
-					);
-			}
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return this.getJSX(this.props);
-		}
-	}]);
-
-	return Auth;
-}(_react.Component);
+};
 
 var mapStateToProps = function mapStateToProps(state) {
 	return { auth: state.auth };
@@ -10733,8 +10722,6 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
@@ -10745,53 +10732,27 @@ var _feedback = __webpack_require__(101);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Feedback = function (_Component) {
-	_inherits(Feedback, _Component);
-
-	function Feedback(props) {
-		_classCallCheck(this, Feedback);
-
-		var _this = _possibleConstructorReturn(this, (Feedback.__proto__ || Object.getPrototypeOf(Feedback)).call(this, props));
-
-		_this.dismissFeedback = _this.props.dismissFeedback.bind(_this);
-		return _this;
-	}
-
-	_createClass(Feedback, [{
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
-
-			var rows = this.props.feedback.map(function (f, n) {
-				return _react2.default.createElement(
-					'div',
-					{ key: n, className: 'feedback' + (f.error ? ' error' : '') },
-					f.msg,
-					_react2.default.createElement(
-						'button',
-						{ onClick: function onClick() {
-								return _this2.dismissFeedback(n);
-							} },
-						'X'
-					)
-				);
-			});
-			return _react2.default.createElement(
-				'div',
-				null,
-				rows
-			);
-		}
-	}]);
-
-	return Feedback;
-}(_react.Component);
+var Feedback = function Feedback(props) {
+	var rows = props.feedback.map(function (f, n) {
+		return _react2.default.createElement(
+			'div',
+			{ key: n, className: 'feedback' + (f.error ? ' error' : '') },
+			f.msg,
+			_react2.default.createElement(
+				'button',
+				{ onClick: function onClick() {
+						return props.dismissFeedback(n);
+					} },
+				'X'
+			)
+		);
+	});
+	return _react2.default.createElement(
+		'div',
+		null,
+		rows
+	);
+};
 
 var mapStateToProps = function mapStateToProps(state) {
 	return { feedback: state.feedback };
@@ -11006,7 +10967,7 @@ var initialState = {
 };
 
 exports.default = function (state, action) {
-	var newstate = void 0;
+	var newState = void 0;
 	switch (action.type) {
 		case _constants2.default.ARTICLES_RECEIVE_DATA:
 			return Object.assign({}, state, {
@@ -11028,17 +10989,17 @@ exports.default = function (state, action) {
 				submittingNew: false
 			});
 		case _constants2.default.ARTICLE_EDIT:
-			newstate = Object.assign({}, state);
-			newstate.status[action.qid] = _constants2.default.ARTICLE_EDITING;
-			return newstate;
+			newState = Object.assign({}, state);
+			newState.status[action.qid] = _constants2.default.ARTICLE_EDITING;
+			return newState;
 		case _constants2.default.ARTICLE_EDIT_FINISH:
-			newstate = Object.assign({}, state);
-			delete newstate.status[action.qid];
-			return newstate;
+			newState = Object.assign({}, state);
+			delete newState.status[action.qid];
+			return newState;
 		case _constants2.default.ARTICLE_EDIT_SUBMIT:
-			newstate = Object.assign({}, state);
-			newstate.status[action.qid] = _constants2.default.ARTICLE_SUBMITTING;
-			return newstate;
+			newState = Object.assign({}, state);
+			newState.status[action.qid] = _constants2.default.ARTICLE_SUBMITTING;
+			return newState;
 		default:
 			return state || initialState;
 	}
@@ -11109,6 +11070,8 @@ var _constants2 = _interopRequireDefault(_constants);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var initialState = [];
 
 exports.default = function (state, action) {
@@ -11118,9 +11081,9 @@ exports.default = function (state, action) {
 				return n !== action.num;
 			});
 		case _constants2.default.FEEDBACK_DISPLAY_ERROR:
-			return state.concat({ msg: action.error, error: true });
+			return [].concat(_toConsumableArray(state), [{ msg: action.error, error: true }]);
 		case _constants2.default.FEEDBACK_DISPLAY_MESSAGE:
-			return state.concat({ msg: action.message, error: false });
+			return [].concat(_toConsumableArray(state), [{ msg: action.message, error: false }]);
 		default:
 			return state || initialState;
 	}
@@ -27022,3 +26985,4 @@ module.exports = function(module) {
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map
