@@ -1,6 +1,6 @@
 # Webpack + React + Redux + Firebase
 
-Starter Kit / Boilerplate to use React, Redux and Firebase in an ES2015 codebase compiled with Webpack.  
+Example of using React, Redux and Firebase with Webpack.  
 
 A version of this app is visible at [vkammerer.github.io/react-redux-firebase](http://vkammerer.github.io/react-redux-firebase)  
 
