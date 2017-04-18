@@ -955,7 +955,7 @@ module.exports = __webpack_require__(18);
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _articles = __webpack_require__(107);
@@ -3999,7 +3999,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.deleteArticle = exports.submitArticleEdit = exports.cancelArticleEdit = exports.startArticleEdit = exports.submitArticle = exports.listenToArticles = undefined;
 
@@ -4014,104 +4014,104 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var articlesRef = _firebaseApp.database.ref('articles');
 
 var listenToArticles = exports.listenToArticles = function listenToArticles() {
-	return function (dispatch) {
-		articlesRef.off();
-		articlesRef.on('value', function (snapshot) {
-			dispatch({
-				type: _constants2.default.ARTICLES_RECEIVE_DATA,
-				data: snapshot.val()
-			});
-		}, function (error) {
-			dispatch({
-				type: _constants2.default.ARTICLES_RECEIVE_DATA_ERROR,
-				message: error.message
-			});
-		});
-	};
+  return function (dispatch) {
+    articlesRef.off();
+    articlesRef.on('value', function (snapshot) {
+      dispatch({
+        type: _constants2.default.ARTICLES_RECEIVE_DATA,
+        data: snapshot.val()
+      });
+    }, function (error) {
+      dispatch({
+        type: _constants2.default.ARTICLES_RECEIVE_DATA_ERROR,
+        message: error.message
+      });
+    });
+  };
 };
 
 var submitArticle = exports.submitArticle = function submitArticle(content) {
-	return function (dispatch, getState) {
-		var state = getState();
-		var article = {
-			content: content,
-			username: state.auth.username,
-			uid: state.auth.uid
-		};
-		dispatch({ type: _constants2.default.ARTICLE_AWAIT_CREATION_RESPONSE });
-		articlesRef.push(article, function (error) {
-			dispatch({ type: _constants2.default.ARTICLE_RECEIVE_CREATION_RESPONSE });
-			if (error) {
-				dispatch({
-					type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
-					error: 'Submission failed! ' + error
-				});
-			} else {
-				dispatch({
-					type: _constants2.default.FEEDBACK_DISPLAY_MESSAGE,
-					message: 'Submission successfully saved!'
-				});
-			}
-		});
-	};
+  return function (dispatch, getState) {
+    var state = getState();
+    var article = {
+      content: content,
+      username: state.auth.username,
+      uid: state.auth.uid
+    };
+    dispatch({ type: _constants2.default.ARTICLE_AWAIT_CREATION_RESPONSE });
+    articlesRef.push(article, function (error) {
+      dispatch({ type: _constants2.default.ARTICLE_RECEIVE_CREATION_RESPONSE });
+      if (error) {
+        dispatch({
+          type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
+          error: 'Submission failed! ' + error
+        });
+      } else {
+        dispatch({
+          type: _constants2.default.FEEDBACK_DISPLAY_MESSAGE,
+          message: 'Submission successfully saved!'
+        });
+      }
+    });
+  };
 };
 
 var startArticleEdit = exports.startArticleEdit = function startArticleEdit(qid) {
-	return function (dispatch) {
-		dispatch({ type: _constants2.default.ARTICLE_EDIT, qid: qid });
-	};
+  return function (dispatch) {
+    dispatch({ type: _constants2.default.ARTICLE_EDIT, qid: qid });
+  };
 };
 
 var cancelArticleEdit = exports.cancelArticleEdit = function cancelArticleEdit(qid) {
-	return function (dispatch) {
-		dispatch({ type: _constants2.default.ARTICLE_EDIT_FINISH, qid: qid });
-	};
+  return function (dispatch) {
+    dispatch({ type: _constants2.default.ARTICLE_EDIT_FINISH, qid: qid });
+  };
 };
 
 var submitArticleEdit = exports.submitArticleEdit = function submitArticleEdit(qid, content) {
-	return function (dispatch, getState) {
-		var state = getState();
-		var article = {
-			content: content,
-			username: state.auth.username,
-			uid: state.auth.uid
-		};
-		dispatch({ type: _constants2.default.ARTICLE_EDIT_SUBMIT, qid: qid });
-		articlesRef.child(qid).set(article, function (error) {
-			dispatch({ type: _constants2.default.ARTICLE_EDIT_FINISH, qid: qid });
-			if (error) {
-				dispatch({
-					type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
-					error: 'Update failed! ' + error
-				});
-			} else {
-				dispatch({
-					type: _constants2.default.FEEDBACK_DISPLAY_MESSAGE,
-					message: 'Update successfully saved!'
-				});
-			}
-		});
-	};
+  return function (dispatch, getState) {
+    var state = getState();
+    var article = {
+      content: content,
+      username: state.auth.username,
+      uid: state.auth.uid
+    };
+    dispatch({ type: _constants2.default.ARTICLE_EDIT_SUBMIT, qid: qid });
+    articlesRef.child(qid).set(article, function (error) {
+      dispatch({ type: _constants2.default.ARTICLE_EDIT_FINISH, qid: qid });
+      if (error) {
+        dispatch({
+          type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
+          error: 'Update failed! ' + error
+        });
+      } else {
+        dispatch({
+          type: _constants2.default.FEEDBACK_DISPLAY_MESSAGE,
+          message: 'Update successfully saved!'
+        });
+      }
+    });
+  };
 };
 
 var deleteArticle = exports.deleteArticle = function deleteArticle(qid) {
-	return function (dispatch) {
-		dispatch({ type: _constants2.default.ARTICLE_EDIT_SUBMIT, qid: qid });
-		articlesRef.child(qid).remove(function (error) {
-			dispatch({ type: _constants2.default.ARTICLE_EDIT_FINISH, qid: qid });
-			if (error) {
-				dispatch({
-					type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
-					error: 'Deletion failed! ' + error
-				});
-			} else {
-				dispatch({
-					type: _constants2.default.FEEDBACK_DISPLAY_MESSAGE,
-					message: 'Article successfully deleted!'
-				});
-			}
-		});
-	};
+  return function (dispatch) {
+    dispatch({ type: _constants2.default.ARTICLE_EDIT_SUBMIT, qid: qid });
+    articlesRef.child(qid).remove(function (error) {
+      dispatch({ type: _constants2.default.ARTICLE_EDIT_FINISH, qid: qid });
+      if (error) {
+        dispatch({
+          type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
+          error: 'Deletion failed! ' + error
+        });
+      } else {
+        dispatch({
+          type: _constants2.default.FEEDBACK_DISPLAY_MESSAGE,
+          message: 'Article successfully deleted!'
+        });
+      }
+    });
+  };
 };
 
 /***/ }),
@@ -6685,7 +6685,7 @@ if (false) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.logoutUser = exports.openAuth = exports.listenToAuth = undefined;
 
@@ -6706,46 +6706,46 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var listenToAuth = exports.listenToAuth = function listenToAuth() {
-	return function (dispatch, getState) {
-		_firebaseApp.auth.onAuthStateChanged(function (authData) {
-			if (authData) {
-				dispatch({
-					type: _constants2.default.AUTH_LOGIN,
-					uid: authData.uid,
-					username: authData.providerData[0].displayName
-				});
+  return function (dispatch, getState) {
+    _firebaseApp.auth.onAuthStateChanged(function (authData) {
+      if (authData) {
+        dispatch({
+          type: _constants2.default.AUTH_LOGIN,
+          uid: authData.uid,
+          username: authData.providerData[0].displayName
+        });
 
-				// reload articles on auth update.
-				var listenToArticlesDispatcher = (0, _articles.listenToArticles)();
-				listenToArticlesDispatcher(dispatch, getState);
-			} else {
-				if (getState().auth.status !== _constants2.default.AUTH_ANONYMOUS) {
-					dispatch({ type: _constants2.default.AUTH_LOGOUT });
-				}
-			}
-		});
-	};
+        // reload articles on auth update.
+        var listenToArticlesDispatcher = (0, _articles.listenToArticles)();
+        listenToArticlesDispatcher(dispatch, getState);
+      } else {
+        if (getState().auth.status !== _constants2.default.AUTH_ANONYMOUS) {
+          dispatch({ type: _constants2.default.AUTH_LOGOUT });
+        }
+      }
+    });
+  };
 };
 
 var openAuth = exports.openAuth = function openAuth() {
-	return function (dispatch) {
-		dispatch({ type: _constants2.default.AUTH_OPEN });
-		var provider = new firebase.auth.FacebookAuthProvider();
-		_firebaseApp.auth.signInWithPopup(provider).catch(function (error) {
-			dispatch({
-				type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
-				error: 'Login failed! ' + error
-			});
-			dispatch({ type: _constants2.default.AUTH_LOGOUT });
-		});
-	};
+  return function (dispatch) {
+    dispatch({ type: _constants2.default.AUTH_OPEN });
+    var provider = new firebase.auth.FacebookAuthProvider();
+    _firebaseApp.auth.signInWithPopup(provider).catch(function (error) {
+      dispatch({
+        type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
+        error: 'Login failed! ' + error
+      });
+      dispatch({ type: _constants2.default.AUTH_LOGOUT });
+    });
+  };
 };
 
 var logoutUser = exports.logoutUser = function logoutUser() {
-	return function (dispatch) {
-		dispatch({ type: _constants2.default.AUTH_LOGOUT });
-		_firebaseApp.auth.signOut();
-	};
+  return function (dispatch) {
+    dispatch({ type: _constants2.default.AUTH_LOGOUT });
+    _firebaseApp.auth.signOut();
+  };
 };
 
 /***/ }),
@@ -10264,7 +10264,7 @@ function warning(message) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.App = undefined;
 
@@ -10297,32 +10297,32 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = exports.App = function (_Component) {
-	_inherits(App, _Component);
+  _inherits(App, _Component);
 
-	function App() {
-		_classCallCheck(this, App);
+  function App() {
+    _classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-	}
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+  }
 
-	_createClass(App, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {
-			_store2.default.dispatch((0, _auth.listenToAuth)());
-			_store2.default.dispatch((0, _articles.listenToArticles)());
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				_reactRedux.Provider,
-				{ store: _store2.default },
-				_react2.default.createElement(_Page2.default, null)
-			);
-		}
-	}]);
+  _createClass(App, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      _store2.default.dispatch((0, _auth.listenToAuth)());
+      _store2.default.dispatch((0, _articles.listenToArticles)());
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _reactRedux.Provider,
+        { store: _store2.default },
+        _react2.default.createElement(_Page2.default, null)
+      );
+    }
+  }]);
 
-	return App;
+  return App;
 }(_react.Component);
 
 /***/ }),
@@ -10343,7 +10343,7 @@ module.exports = __webpack_require__(176);
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.dismissFeedback = undefined;
 
@@ -10354,9 +10354,9 @@ var _constants2 = _interopRequireDefault(_constants);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var dismissFeedback = exports.dismissFeedback = function dismissFeedback(num) {
-	return function (dispatch) {
-		dispatch({ type: _constants2.default.FEEDBACK_DISMISS, num: num });
-	};
+  return function (dispatch) {
+    dispatch({ type: _constants2.default.FEEDBACK_DISMISS, num: num });
+  };
 };
 
 /***/ }),
@@ -10367,7 +10367,7 @@ var dismissFeedback = exports.dismissFeedback = function dismissFeedback(num) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10389,91 +10389,91 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Article = function (_Component) {
-	_inherits(Article, _Component);
+  _inherits(Article, _Component);
 
-	function Article() {
-		var _ref;
+  function Article() {
+    var _ref;
 
-		var _temp, _this, _ret;
+    var _temp, _this, _ret;
 
-		_classCallCheck(this, Article);
+    _classCallCheck(this, Article);
 
-		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-			args[_key] = arguments[_key];
-		}
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Article.__proto__ || Object.getPrototypeOf(Article)).call.apply(_ref, [this].concat(args))), _this), Object.defineProperty(_this, 'submit', {
-			enumerable: true,
-			writable: true,
-			value: function value(e) {
-				e.preventDefault();
-				_this.props.submitArticleEdit(_this.refs.article.value);
-				_this.refs.article.value = '';
-			}
-		}), _temp), _possibleConstructorReturn(_this, _ret);
-	}
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Article.__proto__ || Object.getPrototypeOf(Article)).call.apply(_ref, [this].concat(args))), _this), Object.defineProperty(_this, 'submit', {
+      enumerable: true,
+      writable: true,
+      value: function value(e) {
+        e.preventDefault();
+        _this.props.submitArticleEdit(_this.refs.article.value);
+        _this.refs.article.value = '';
+      }
+    }), _temp), _possibleConstructorReturn(_this, _ret);
+  }
 
-	_createClass(Article, [{
-		key: 'render',
-		value: function render() {
-			var button = void 0;
-			if (this.props.status === _constants2.default.ARTICLE_EDITING) {
-				return _react2.default.createElement(
-					'form',
-					{ onSubmit: this.submit },
-					_react2.default.createElement('input', { ref: 'article', defaultValue: this.props.article.content }),
-					_react2.default.createElement(
-						'button',
-						{ type: 'button', onClick: this.props.cancelArticleEdit },
-						'Cancel'
-					),
-					_react2.default.createElement(
-						'button',
-						{ type: 'submit', onClick: this.submit },
-						'Submit'
-					)
-				);
-			}
-			if (!this.props.canEdit) {
-				button = '';
-			} else if (this.props.status === _constants2.default.ARTICLE_SUBMITTING) {
-				button = _react2.default.createElement(
-					'button',
-					{ disabled: 'disabled' },
-					'Submitting...'
-				);
-			} else {
-				button = _react2.default.createElement(
-					'span',
-					null,
-					_react2.default.createElement(
-						'button',
-						{ onClick: this.props.startArticleEdit },
-						'Edit'
-					),
-					_react2.default.createElement(
-						'button',
-						{ onClick: this.props.deleteArticle },
-						'Delete'
-					)
-				);
-			}
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'span',
-					null,
-					this.props.article.username + ' said:'
-				),
-				this.props.article.content,
-				' ',
-				button
-			);
-		}
-	}]);
+  _createClass(Article, [{
+    key: 'render',
+    value: function render() {
+      var button = void 0;
+      if (this.props.status === _constants2.default.ARTICLE_EDITING) {
+        return _react2.default.createElement(
+          'form',
+          { onSubmit: this.submit },
+          _react2.default.createElement('input', { ref: 'article', defaultValue: this.props.article.content }),
+          _react2.default.createElement(
+            'button',
+            { type: 'button', onClick: this.props.cancelArticleEdit },
+            'Cancel'
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit', onClick: this.submit },
+            'Submit'
+          )
+        );
+      }
+      if (!this.props.canEdit) {
+        button = '';
+      } else if (this.props.status === _constants2.default.ARTICLE_SUBMITTING) {
+        button = _react2.default.createElement(
+          'button',
+          { disabled: 'disabled' },
+          'Submitting...'
+        );
+      } else {
+        button = _react2.default.createElement(
+          'span',
+          null,
+          _react2.default.createElement(
+            'button',
+            { onClick: this.props.startArticleEdit },
+            'Edit'
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.props.deleteArticle },
+            'Delete'
+          )
+        );
+      }
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'span',
+          null,
+          this.props.article.username + ' said:'
+        ),
+        this.props.article.content,
+        ' ',
+        button
+      );
+    }
+  }]);
 
-	return Article;
+  return Article;
 }(_react.Component);
 
 exports.default = Article;
@@ -10486,7 +10486,7 @@ exports.default = Article;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10512,122 +10512,122 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Articles = function (_Component) {
-	_inherits(Articles, _Component);
+  _inherits(Articles, _Component);
 
-	function Articles() {
-		var _ref;
+  function Articles() {
+    var _ref;
 
-		var _temp, _this, _ret;
+    var _temp, _this, _ret;
 
-		_classCallCheck(this, Articles);
+    _classCallCheck(this, Articles);
 
-		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-			args[_key] = arguments[_key];
-		}
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Articles.__proto__ || Object.getPrototypeOf(Articles)).call.apply(_ref, [this].concat(args))), _this), Object.defineProperty(_this, 'submitNewArticle', {
-			enumerable: true,
-			writable: true,
-			value: function value(e) {
-				if (!_this.props.articles.submitting) {
-					e.preventDefault();
-					if (_this.refs.newArticle.value) {
-						_this.props.submitArticle(_this.refs.newArticle.value);
-					}
-					_this.refs.newArticle.value = '';
-				}
-			}
-		}), _temp), _possibleConstructorReturn(_this, _ret);
-	}
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Articles.__proto__ || Object.getPrototypeOf(Articles)).call.apply(_ref, [this].concat(args))), _this), Object.defineProperty(_this, 'submitNewArticle', {
+      enumerable: true,
+      writable: true,
+      value: function value(e) {
+        if (!_this.props.articles.submitting) {
+          e.preventDefault();
+          if (_this.refs.newArticle.value) {
+            _this.props.submitArticle(_this.refs.newArticle.value);
+          }
+          _this.refs.newArticle.value = '';
+        }
+      }
+    }), _temp), _possibleConstructorReturn(_this, _ret);
+  }
 
-	_createClass(Articles, [{
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
+  _createClass(Articles, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
-			var rows = [];
-			if (this.props.articles.data) {
-				rows = Object.keys(this.props.articles.data).map(function (qid) {
-					var article = _this2.props.articles.data[qid];
-					var status = _this2.props.articles.status[qid];
-					var thisStartArticleEdit = function thisStartArticleEdit() {
-						return _this2.props.startArticleEdit(qid);
-					};
-					var thisCancelArticleEdit = function thisCancelArticleEdit() {
-						return _this2.props.cancelArticleEdit(qid);
-					};
-					var thisSubmitArticleEdit = function thisSubmitArticleEdit(value) {
-						return _this2.props.submitArticleEdit(qid, value);
-					};
-					var thisDeleteArticle = function thisDeleteArticle() {
-						return _this2.props.deleteArticle(qid);
-					};
-					return _react2.default.createElement(_Article2.default, {
-						key: qid,
-						qid: qid,
-						article: article,
-						status: status,
-						canEdit: _this2.props.auth.uid === article.uid,
-						startArticleEdit: thisStartArticleEdit,
-						cancelArticleEdit: thisCancelArticleEdit,
-						submitArticleEdit: thisSubmitArticleEdit,
-						deleteArticle: thisDeleteArticle
-					});
-				});
-			}
-			var content = void 0;
-			if (this.props.auth.uid) {
-				content = _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'form',
-						{ onSubmit: this.submitNewArticle },
-						_react2.default.createElement('input', { ref: 'newArticle', placeholder: 'write something clever!' }),
-						_react2.default.createElement(
-							'button',
-							{ type: 'submit', disabled: this.props.articles.submittingNew },
-							this.props.articles.submittingNew ? 'Submitting...' : 'Submit'
-						)
-					)
-				);
-			} else {
-				content = _react2.default.createElement(
-					'p',
-					null,
-					'Log in to add a new article of your own!'
-				);
-			}
-			var rowsOrLoading = this.props.articles.hasReceivedData ? rows : 'Loading articles...';
-			return _react2.default.createElement(
-				'div',
-				null,
-				content,
-				this.props.articles.errorMessage ? _react2.default.createElement(
-					'p',
-					null,
-					this.props.articles.errorMessage
-				) : rowsOrLoading
-			);
-		}
-	}]);
+      var rows = [];
+      if (this.props.articles.data) {
+        rows = Object.keys(this.props.articles.data).map(function (qid) {
+          var article = _this2.props.articles.data[qid];
+          var status = _this2.props.articles.status[qid];
+          var thisStartArticleEdit = function thisStartArticleEdit() {
+            return _this2.props.startArticleEdit(qid);
+          };
+          var thisCancelArticleEdit = function thisCancelArticleEdit() {
+            return _this2.props.cancelArticleEdit(qid);
+          };
+          var thisSubmitArticleEdit = function thisSubmitArticleEdit(value) {
+            return _this2.props.submitArticleEdit(qid, value);
+          };
+          var thisDeleteArticle = function thisDeleteArticle() {
+            return _this2.props.deleteArticle(qid);
+          };
+          return _react2.default.createElement(_Article2.default, {
+            key: qid,
+            qid: qid,
+            article: article,
+            status: status,
+            canEdit: _this2.props.auth.uid === article.uid,
+            startArticleEdit: thisStartArticleEdit,
+            cancelArticleEdit: thisCancelArticleEdit,
+            submitArticleEdit: thisSubmitArticleEdit,
+            deleteArticle: thisDeleteArticle
+          });
+        });
+      }
+      var content = void 0;
+      if (this.props.auth.uid) {
+        content = _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'form',
+            { onSubmit: this.submitNewArticle },
+            _react2.default.createElement('input', { ref: 'newArticle', placeholder: 'write something clever!' }),
+            _react2.default.createElement(
+              'button',
+              { type: 'submit', disabled: this.props.articles.submittingNew },
+              this.props.articles.submittingNew ? 'Submitting...' : 'Submit'
+            )
+          )
+        );
+      } else {
+        content = _react2.default.createElement(
+          'p',
+          null,
+          'Log in to add a new article of your own!'
+        );
+      }
+      var rowsOrLoading = this.props.articles.hasReceivedData ? rows : 'Loading articles...';
+      return _react2.default.createElement(
+        'div',
+        null,
+        content,
+        this.props.articles.errorMessage ? _react2.default.createElement(
+          'p',
+          null,
+          this.props.articles.errorMessage
+        ) : rowsOrLoading
+      );
+    }
+  }]);
 
-	return Articles;
+  return Articles;
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-	return {
-		articles: state.articles,
-		auth: state.auth
-	};
+  return {
+    articles: state.articles,
+    auth: state.auth
+  };
 };
 
 var mapDispatchToProps = {
-	submitArticle: _articles.submitArticle,
-	startArticleEdit: _articles.startArticleEdit,
-	cancelArticleEdit: _articles.cancelArticleEdit,
-	submitArticleEdit: _articles.submitArticleEdit,
-	deleteArticle: _articles.deleteArticle
+  submitArticle: _articles.submitArticle,
+  startArticleEdit: _articles.startArticleEdit,
+  cancelArticleEdit: _articles.cancelArticleEdit,
+  submitArticleEdit: _articles.submitArticleEdit,
+  deleteArticle: _articles.deleteArticle
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Articles);
@@ -10640,7 +10640,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _react = __webpack_require__(10);
@@ -10658,55 +10658,55 @@ var _constants2 = _interopRequireDefault(_constants);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Auth = function Auth(props) {
-	switch (props.auth.status) {
-		case _constants2.default.AUTH_LOGGED_IN:
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'span',
-					null,
-					'Logged in as ',
-					props.auth.username,
-					'.'
-				),
-				" ",
-				_react2.default.createElement(
-					'button',
-					{ onClick: props.logoutUser },
-					'Log out'
-				)
-			);
-		case _constants2.default.AUTH_AWAITING_RESPONSE:
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'button',
-					{ disabled: true },
-					'authenticating...'
-				)
-			);
-		default:
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'button',
-					{ onClick: props.openAuth },
-					'Log in'
-				)
-			);
-	}
+  switch (props.auth.status) {
+    case _constants2.default.AUTH_LOGGED_IN:
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'span',
+          null,
+          'Logged in as ',
+          props.auth.username,
+          '.'
+        ),
+        " ",
+        _react2.default.createElement(
+          'button',
+          { onClick: props.logoutUser },
+          'Log out'
+        )
+      );
+    case _constants2.default.AUTH_AWAITING_RESPONSE:
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'button',
+          { disabled: true },
+          'authenticating...'
+        )
+      );
+    default:
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'button',
+          { onClick: props.openAuth },
+          'Log in'
+        )
+      );
+  }
 };
 
 var mapStateToProps = function mapStateToProps(state) {
-	return { auth: state.auth };
+  return { auth: state.auth };
 };
 
 var mapDispatchToProps = {
-	openAuth: _auth.openAuth,
-	logoutUser: _auth.logoutUser
+  openAuth: _auth.openAuth,
+  logoutUser: _auth.logoutUser
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Auth);
@@ -10719,7 +10719,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _react = __webpack_require__(10);
@@ -10733,29 +10733,29 @@ var _feedback = __webpack_require__(101);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Feedback = function Feedback(props) {
-	var rows = props.feedback.map(function (f, n) {
-		return _react2.default.createElement(
-			'div',
-			{ key: n, className: 'feedback' + (f.error ? ' error' : '') },
-			f.msg,
-			_react2.default.createElement(
-				'button',
-				{ onClick: function onClick() {
-						return props.dismissFeedback(n);
-					} },
-				'X'
-			)
-		);
-	});
-	return _react2.default.createElement(
-		'div',
-		null,
-		rows
-	);
+  var rows = props.feedback.map(function (f, n) {
+    return _react2.default.createElement(
+      'div',
+      { key: n, className: 'feedback' + (f.error ? ' error' : '') },
+      f.msg,
+      _react2.default.createElement(
+        'button',
+        { onClick: function onClick() {
+            return props.dismissFeedback(n);
+          } },
+        'X'
+      )
+    );
+  });
+  return _react2.default.createElement(
+    'div',
+    null,
+    rows
+  );
 };
 
 var mapStateToProps = function mapStateToProps(state) {
-	return { feedback: state.feedback };
+  return { feedback: state.feedback };
 };
 
 var mapDispatchToProps = { dismissFeedback: _feedback.dismissFeedback };
@@ -10770,7 +10770,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _react = __webpack_require__(10);
@@ -10792,13 +10792,13 @@ var _Articles2 = _interopRequireDefault(_Articles);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Page = function Page() {
-	return _react2.default.createElement(
-		'div',
-		null,
-		_react2.default.createElement(_Auth2.default, null),
-		_react2.default.createElement(_Feedback2.default, null),
-		_react2.default.createElement(_Articles2.default, null)
-	);
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_Auth2.default, null),
+    _react2.default.createElement(_Feedback2.default, null),
+    _react2.default.createElement(_Articles2.default, null)
+  );
 };
 
 exports.default = Page;
@@ -10811,21 +10811,21 @@ exports.default = Page;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.default = {
-	// ACTIONS
-	ARTICLES_RECEIVE_DATA: 'ARTICLES_RECEIVE_DATA',
-	ARTICLES_RECEIVE_DATA_ERROR: 'ARTICLES_RECEIVE_DATA_ERROR',
-	ARTICLE_AWAIT_CREATION_RESPONSE: 'ARTICLE_AWAIT_CREATION_RESPONSE',
-	ARTICLE_RECEIVE_CREATION_RESPONSE: 'ARTICLE_RECEIVE_CREATION_RESPONSE',
-	ARTICLE_EDIT: 'ARTICLE_EDIT',
-	ARTICLE_EDIT_FINISH: 'ARTICLE_EDIT_FINISH',
-	ARTICLE_EDIT_SUBMIT: 'ARTICLE_EDIT_SUBMIT',
+  // ACTIONS
+  ARTICLES_RECEIVE_DATA: 'ARTICLES_RECEIVE_DATA',
+  ARTICLES_RECEIVE_DATA_ERROR: 'ARTICLES_RECEIVE_DATA_ERROR',
+  ARTICLE_AWAIT_CREATION_RESPONSE: 'ARTICLE_AWAIT_CREATION_RESPONSE',
+  ARTICLE_RECEIVE_CREATION_RESPONSE: 'ARTICLE_RECEIVE_CREATION_RESPONSE',
+  ARTICLE_EDIT: 'ARTICLE_EDIT',
+  ARTICLE_EDIT_FINISH: 'ARTICLE_EDIT_FINISH',
+  ARTICLE_EDIT_SUBMIT: 'ARTICLE_EDIT_SUBMIT',
 
-	// STATES
-	ARTICLE_EDITING: 'ARTICLE_EDITING',
-	ARTICLE_SUBMITTING: 'ARTICLE_SUBMITTING'
+  // STATES
+  ARTICLE_EDITING: 'ARTICLE_EDITING',
+  ARTICLE_SUBMITTING: 'ARTICLE_SUBMITTING'
 };
 
 /***/ }),
@@ -10836,18 +10836,18 @@ exports.default = {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.default = {
-	// ACTIONS
-	AUTH_OPEN: 'AUTH_OPEN',
-	AUTH_LOGIN: 'AUTH_LOGIN',
-	AUTH_LOGOUT: 'AUTH_LOGOUT',
+  // ACTIONS
+  AUTH_OPEN: 'AUTH_OPEN',
+  AUTH_LOGIN: 'AUTH_LOGIN',
+  AUTH_LOGOUT: 'AUTH_LOGOUT',
 
-	// STATES
-	AUTH_ANONYMOUS: 'AUTH_ANONYMOUS',
-	AUTH_AWAITING_RESPONSE: 'AUTH_AWAITING_RESPONSE',
-	AUTH_LOGGED_IN: 'AUTH_LOGGED_IN'
+  // STATES
+  AUTH_ANONYMOUS: 'AUTH_ANONYMOUS',
+  AUTH_AWAITING_RESPONSE: 'AUTH_AWAITING_RESPONSE',
+  AUTH_LOGGED_IN: 'AUTH_LOGGED_IN'
 };
 
 /***/ }),
@@ -10858,12 +10858,12 @@ exports.default = {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.default = {
-	FEEDBACK_DISPLAY_ERROR: 'FEEDBACK_DISPLAY_ERROR',
-	FEEDBACK_DISPLAY_MESSAGE: 'FEEDBACK_DISPLAY_MESSAGE',
-	FEEDBACK_DISMISS: 'FEEDBACK_DISMISS'
+  FEEDBACK_DISPLAY_ERROR: 'FEEDBACK_DISPLAY_ERROR',
+  FEEDBACK_DISPLAY_MESSAGE: 'FEEDBACK_DISPLAY_MESSAGE',
+  FEEDBACK_DISMISS: 'FEEDBACK_DISMISS'
 };
 
 /***/ }),
@@ -10874,15 +10874,15 @@ exports.default = {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.default = {
-	firebaseConfig: {
-		apiKey: 'AIzaSyCHvJ-2m_Cn_JqUxXmwqvqy9b-6FbsYtEI',
-		authDomain: 'brilliant-inferno-6675.firebaseapp.com',
-		databaseURL: 'https://brilliant-inferno-6675.firebaseio.com',
-		storageBucket: 'brilliant-inferno-6675.appspot.com'
-	}
+  firebaseConfig: {
+    apiKey: 'AIzaSyCHvJ-2m_Cn_JqUxXmwqvqy9b-6FbsYtEI',
+    authDomain: 'brilliant-inferno-6675.firebaseapp.com',
+    databaseURL: 'https://brilliant-inferno-6675.firebaseio.com',
+    storageBucket: 'brilliant-inferno-6675.appspot.com'
+  }
 };
 
 /***/ }),
@@ -10912,7 +10912,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _redux = __webpack_require__(56);
@@ -10934,7 +10934,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var middlewares = [_reduxThunk2.default];
 
 if (false) {
-	middlewares.push(_reduxLogger2.default);
+  middlewares.push(_reduxLogger2.default);
 }
 
 var createStoreWithMiddleware = _redux.applyMiddleware.apply(undefined, middlewares)(_redux.createStore);
@@ -10949,7 +10949,7 @@ exports.default = store;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _constants = __webpack_require__(11);
@@ -10959,50 +10959,50 @@ var _constants2 = _interopRequireDefault(_constants);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initialState = {
-	hasReceivedData: false,
-	submittingNew: false,
-	errorMessage: '',
-	data: {},
-	status: {}
+  hasReceivedData: false,
+  submittingNew: false,
+  errorMessage: '',
+  data: {},
+  status: {}
 };
 
 exports.default = function (state, action) {
-	var newState = void 0;
-	switch (action.type) {
-		case _constants2.default.ARTICLES_RECEIVE_DATA:
-			return Object.assign({}, state, {
-				hasReceivedData: true,
-				data: action.data,
-				errorMessage: ''
-			});
-		case _constants2.default.ARTICLES_RECEIVE_DATA_ERROR:
-			return Object.assign({}, state, {
-				data: null,
-				errorMessage: action.message
-			});
-		case _constants2.default.ARTICLE_AWAIT_CREATION_RESPONSE:
-			return Object.assign({}, state, {
-				submittingNew: true
-			});
-		case _constants2.default.ARTICLE_RECEIVE_CREATION_RESPONSE:
-			return Object.assign({}, state, {
-				submittingNew: false
-			});
-		case _constants2.default.ARTICLE_EDIT:
-			newState = Object.assign({}, state);
-			newState.status[action.qid] = _constants2.default.ARTICLE_EDITING;
-			return newState;
-		case _constants2.default.ARTICLE_EDIT_FINISH:
-			newState = Object.assign({}, state);
-			delete newState.status[action.qid];
-			return newState;
-		case _constants2.default.ARTICLE_EDIT_SUBMIT:
-			newState = Object.assign({}, state);
-			newState.status[action.qid] = _constants2.default.ARTICLE_SUBMITTING;
-			return newState;
-		default:
-			return state || initialState;
-	}
+  var newState = void 0;
+  switch (action.type) {
+    case _constants2.default.ARTICLES_RECEIVE_DATA:
+      return Object.assign({}, state, {
+        hasReceivedData: true,
+        data: action.data,
+        errorMessage: ''
+      });
+    case _constants2.default.ARTICLES_RECEIVE_DATA_ERROR:
+      return Object.assign({}, state, {
+        data: null,
+        errorMessage: action.message
+      });
+    case _constants2.default.ARTICLE_AWAIT_CREATION_RESPONSE:
+      return Object.assign({}, state, {
+        submittingNew: true
+      });
+    case _constants2.default.ARTICLE_RECEIVE_CREATION_RESPONSE:
+      return Object.assign({}, state, {
+        submittingNew: false
+      });
+    case _constants2.default.ARTICLE_EDIT:
+      newState = Object.assign({}, state);
+      newState.status[action.qid] = _constants2.default.ARTICLE_EDITING;
+      return newState;
+    case _constants2.default.ARTICLE_EDIT_FINISH:
+      newState = Object.assign({}, state);
+      delete newState.status[action.qid];
+      return newState;
+    case _constants2.default.ARTICLE_EDIT_SUBMIT:
+      newState = Object.assign({}, state);
+      newState.status[action.qid] = _constants2.default.ARTICLE_SUBMITTING;
+      return newState;
+    default:
+      return state || initialState;
+  }
 };
 
 /***/ }),
@@ -11013,7 +11013,7 @@ exports.default = function (state, action) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _constants = __webpack_require__(11);
@@ -11023,34 +11023,34 @@ var _constants2 = _interopRequireDefault(_constants);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initialState = {
-	username: null,
-	uid: null,
-	status: _constants2.default.AUTH_ANONYMOUS
+  username: null,
+  uid: null,
+  status: _constants2.default.AUTH_ANONYMOUS
 };
 
 exports.default = function (state, action) {
-	switch (action.type) {
-		case _constants2.default.AUTH_OPEN:
-			return {
-				status: _constants2.default.AUTH_AWAITING_RESPONSE,
-				username: 'guest',
-				uid: null
-			};
-		case _constants2.default.AUTH_LOGIN:
-			return {
-				status: _constants2.default.AUTH_LOGGED_IN,
-				username: action.username,
-				uid: action.uid
-			};
-		case _constants2.default.AUTH_LOGOUT:
-			return {
-				status: _constants2.default.AUTH_ANONYMOUS,
-				username: 'guest',
-				uid: null
-			};
-		default:
-			return state || initialState;
-	}
+  switch (action.type) {
+    case _constants2.default.AUTH_OPEN:
+      return {
+        status: _constants2.default.AUTH_AWAITING_RESPONSE,
+        username: 'guest',
+        uid: null
+      };
+    case _constants2.default.AUTH_LOGIN:
+      return {
+        status: _constants2.default.AUTH_LOGGED_IN,
+        username: action.username,
+        uid: action.uid
+      };
+    case _constants2.default.AUTH_LOGOUT:
+      return {
+        status: _constants2.default.AUTH_ANONYMOUS,
+        username: 'guest',
+        uid: null
+      };
+    default:
+      return state || initialState;
+  }
 };
 
 /***/ }),
@@ -11061,7 +11061,7 @@ exports.default = function (state, action) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _constants = __webpack_require__(11);
@@ -11075,18 +11075,18 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var initialState = [];
 
 exports.default = function (state, action) {
-	switch (action.type) {
-		case _constants2.default.FEEDBACK_DISMISS:
-			return state.filter(function (i, n) {
-				return n !== action.num;
-			});
-		case _constants2.default.FEEDBACK_DISPLAY_ERROR:
-			return [].concat(_toConsumableArray(state), [{ msg: action.error, error: true }]);
-		case _constants2.default.FEEDBACK_DISPLAY_MESSAGE:
-			return [].concat(_toConsumableArray(state), [{ msg: action.message, error: false }]);
-		default:
-			return state || initialState;
-	}
+  switch (action.type) {
+    case _constants2.default.FEEDBACK_DISMISS:
+      return state.filter(function (i, n) {
+        return n !== action.num;
+      });
+    case _constants2.default.FEEDBACK_DISPLAY_ERROR:
+      return [].concat(_toConsumableArray(state), [{ msg: action.error, error: true }]);
+    case _constants2.default.FEEDBACK_DISPLAY_MESSAGE:
+      return [].concat(_toConsumableArray(state), [{ msg: action.message, error: false }]);
+    default:
+      return state || initialState;
+  }
 };
 
 /***/ }),
@@ -11097,7 +11097,7 @@ exports.default = function (state, action) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _redux = __webpack_require__(56);
@@ -11117,9 +11117,9 @@ var _feedback2 = _interopRequireDefault(_feedback);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
-	articles: _articles2.default,
-	auth: _auth2.default,
-	feedback: _feedback2.default
+  articles: _articles2.default,
+  auth: _auth2.default,
+  feedback: _feedback2.default
 });
 
 exports.default = rootReducer;
