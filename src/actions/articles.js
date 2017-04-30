@@ -5,7 +5,6 @@ const articlesRef = database.ref("articles");
 
 export const listenToArticles = () => {
   return dispatch => {
-    articlesRef.off();
     articlesRef.on(
       "value",
       snapshot => {

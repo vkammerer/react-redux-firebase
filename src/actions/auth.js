@@ -1,7 +1,6 @@
 import * as firebase from "firebase";
 import C from "../constants";
 import { auth } from "../firebaseApp";
-import { listenToArticles } from "./articles";
 
 export const listenToAuth = () => {
   return (dispatch, getState) => {
@@ -12,10 +11,6 @@ export const listenToAuth = () => {
           uid: authData.uid,
           username: authData.providerData[0].displayName
         });
-
-        // reload articles on auth update.
-        const listenToArticlesDispatcher = listenToArticles();
-        listenToArticlesDispatcher(dispatch, getState);
       } else {
         if (getState().auth.status !== C.AUTH_ANONYMOUS) {
           dispatch({ type: C.AUTH_LOGOUT });
