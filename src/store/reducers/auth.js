@@ -1,9 +1,9 @@
-import C from '../../constants';
+import C from "../../constants";
 
 const initialState = {
   username: null,
   uid: null,
-  status: C.AUTH_ANONYMOUS,
+  status: C.AUTH_ANONYMOUS
 };
 
 export default (state, action) => {
@@ -11,7 +11,7 @@ export default (state, action) => {
     case C.AUTH_OPEN:
       return {
         status: C.AUTH_AWAITING_RESPONSE,
-        username: 'guest',
+        username: "guest",
         uid: null
       };
     case C.AUTH_LOGIN:
@@ -23,9 +23,10 @@ export default (state, action) => {
     case C.AUTH_LOGOUT:
       return {
         status: C.AUTH_ANONYMOUS,
-        username: 'guest',
+        username: "guest",
         uid: null
       };
-    default: return state || initialState;
+    default:
+      return state || initialState;
   }
 };

@@ -1,25 +1,27 @@
-import React, { Component } from 'react';
-import C from '../constants';
+import React, { Component } from "react";
+import C from "../constants";
 
 class Article extends Component {
   submit = e => {
     e.preventDefault();
     this.props.submitArticleEdit(this.refs.article.value);
-    this.refs.article.value = '';
-  }
+    this.refs.article.value = "";
+  };
   render() {
     let button;
     if (this.props.status === C.ARTICLE_EDITING) {
       return (
         <form onSubmit={this.submit}>
           <input ref="article" defaultValue={this.props.article.content} />
-          <button type="button" onClick={this.props.cancelArticleEdit}>Cancel</button>
+          <button type="button" onClick={this.props.cancelArticleEdit}>
+            Cancel
+          </button>
           <button type="submit" onClick={this.submit}>Submit</button>
         </form>
       );
     }
     if (!this.props.canEdit) {
-      button = '';
+      button = "";
     } else if (this.props.status === C.ARTICLE_SUBMITTING) {
       button = <button disabled="disabled">Submitting...</button>;
     } else {

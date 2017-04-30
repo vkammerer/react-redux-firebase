@@ -1,11 +1,11 @@
-import C from '../../constants';
+import C from "../../constants";
 
 const initialState = {
   hasReceivedData: false,
   submittingNew: false,
-  errorMessage: '',
+  errorMessage: "",
   data: {},
-  status: {},
+  status: {}
 };
 
 export default (state, action) => {
@@ -16,7 +16,7 @@ export default (state, action) => {
         ...state,
         hasReceivedData: true,
         data: action.data,
-        errorMessage: ''
+        errorMessage: ""
       };
     case C.ARTICLES_RECEIVE_DATA_ERROR:
       return {
@@ -46,6 +46,7 @@ export default (state, action) => {
       newState = { ...state };
       newState.status[action.qid] = C.ARTICLE_SUBMITTING;
       return newState;
-    default: return state || initialState;
+    default:
+      return state || initialState;
   }
 };

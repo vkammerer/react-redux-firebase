@@ -1,7 +1,7 @@
-import React from 'react';
-import Auth from './Auth';
-import Feedback from './Feedback';
-import Articles from './Articles';
+import React from "react";
+import Auth from "./Auth";
+import Feedback from "./Feedback";
+import Articles from "./Articles";
 
 const Page = () => (
   <div>

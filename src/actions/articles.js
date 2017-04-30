@@ -1,26 +1,30 @@
-import C from '../constants';
-import { database } from '../firebaseApp';
+import C from "../constants";
+import { database } from "../firebaseApp";
 
-const articlesRef = database.ref('articles');
+const articlesRef = database.ref("articles");
 
 export const listenToArticles = () => {
-  return (dispatch) => {
+  return dispatch => {
     articlesRef.off();
-    articlesRef.on('value', (snapshot) => {
-      dispatch({
-        type: C.ARTICLES_RECEIVE_DATA,
-        data: snapshot.val()
-      });
-    }, (error) => {
-      dispatch({
-        type: C.ARTICLES_RECEIVE_DATA_ERROR,
-        message: error.message
-      });
-    });
+    articlesRef.on(
+      "value",
+      snapshot => {
+        dispatch({
+          type: C.ARTICLES_RECEIVE_DATA,
+          data: snapshot.val()
+        });
+      },
+      error => {
+        dispatch({
+          type: C.ARTICLES_RECEIVE_DATA_ERROR,
+          message: error.message
+        });
+      }
+    );
   };
 };
 
-export const submitArticle = (content) => {
+export const submitArticle = content => {
   return (dispatch, getState) => {
     const state = getState();
     const article = {
@@ -29,7 +33,7 @@ export const submitArticle = (content) => {
       uid: state.auth.uid
     };
     dispatch({ type: C.ARTICLE_AWAIT_CREATION_RESPONSE });
-    articlesRef.push(article, (error) => {
+    articlesRef.push(article, error => {
       dispatch({ type: C.ARTICLE_RECEIVE_CREATION_RESPONSE });
       if (error) {
         dispatch({
@@ -39,21 +43,21 @@ export const submitArticle = (content) => {
       } else {
         dispatch({
           type: C.FEEDBACK_DISPLAY_MESSAGE,
-          message: 'Submission successfully saved!'
+          message: "Submission successfully saved!"
         });
       }
     });
   };
 };
 
-export const startArticleEdit = (qid) => {
-  return (dispatch) => {
+export const startArticleEdit = qid => {
+  return dispatch => {
     dispatch({ type: C.ARTICLE_EDIT, qid });
   };
 };
 
-export const cancelArticleEdit = (qid) => {
-  return (dispatch) => {
+export const cancelArticleEdit = qid => {
+  return dispatch => {
     dispatch({ type: C.ARTICLE_EDIT_FINISH, qid });
   };
 };
@@ -67,7 +71,7 @@ export const submitArticleEdit = (qid, content) => {
       uid: state.auth.uid
     };
     dispatch({ type: C.ARTICLE_EDIT_SUBMIT, qid });
-    articlesRef.child(qid).set(article, (error) => {
+    articlesRef.child(qid).set(article, error => {
       dispatch({ type: C.ARTICLE_EDIT_FINISH, qid });
       if (error) {
         dispatch({
@@ -77,17 +81,17 @@ export const submitArticleEdit = (qid, content) => {
       } else {
         dispatch({
           type: C.FEEDBACK_DISPLAY_MESSAGE,
-          message: 'Update successfully saved!'
+          message: "Update successfully saved!"
         });
       }
     });
   };
 };
 
-export const deleteArticle = (qid) => {
-  return (dispatch) => {
+export const deleteArticle = qid => {
+  return dispatch => {
     dispatch({ type: C.ARTICLE_EDIT_SUBMIT, qid });
-    articlesRef.child(qid).remove((error) => {
+    articlesRef.child(qid).remove(error => {
       dispatch({ type: C.ARTICLE_EDIT_FINISH, qid });
       if (error) {
         dispatch({
@@ -97,7 +101,7 @@ export const deleteArticle = (qid) => {
       } else {
         dispatch({
           type: C.FEEDBACK_DISPLAY_MESSAGE,
-          message: 'Article successfully deleted!'
+          message: "Article successfully deleted!"
         });
       }
     });

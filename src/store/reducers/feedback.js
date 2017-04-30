@@ -1,4 +1,4 @@
-import C from '../../constants';
+import C from "../../constants";
 
 const initialState = [];
 
@@ -10,6 +10,7 @@ export default (state, action) => {
       return [...state, { msg: action.error, error: true }];
     case C.FEEDBACK_DISPLAY_MESSAGE:
       return [...state, { msg: action.message, error: false }];
-    default: return state || initialState;
+    default:
+      return state || initialState;
   }
 };

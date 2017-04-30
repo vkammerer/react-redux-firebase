@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   submitArticle,
   startArticleEdit,
   cancelArticleEdit,
   submitArticleEdit,
   deleteArticle
-} from '../actions/articles';
-import Article from './Article';
+} from "../actions/articles";
+import Article from "./Article";
 
 class Articles extends Component {
   submitNewArticle = e => {
@@ -16,18 +16,19 @@ class Articles extends Component {
       if (this.refs.newArticle.value) {
         this.props.submitArticle(this.refs.newArticle.value);
       }
-      this.refs.newArticle.value = '';
+      this.refs.newArticle.value = "";
     }
-  }
+  };
   render() {
     let rows = [];
     if (this.props.articles.data) {
-      rows = Object.keys(this.props.articles.data).map((qid) => {
+      rows = Object.keys(this.props.articles.data).map(qid => {
         const article = this.props.articles.data[qid];
         const status = this.props.articles.status[qid];
         const thisStartArticleEdit = () => this.props.startArticleEdit(qid);
         const thisCancelArticleEdit = () => this.props.cancelArticleEdit(qid);
-        const thisSubmitArticleEdit = (value) => this.props.submitArticleEdit(qid, value);
+        const thisSubmitArticleEdit = value =>
+          this.props.submitArticleEdit(qid, value);
         const thisDeleteArticle = () => this.props.deleteArticle(qid);
         return (
           <Article
@@ -51,7 +52,7 @@ class Articles extends Component {
           <form onSubmit={this.submitNewArticle}>
             <input ref="newArticle" placeholder="write something clever!" />
             <button type="submit" disabled={this.props.articles.submittingNew}>
-              {this.props.articles.submittingNew ? 'Submitting...' : 'Submit'}
+              {this.props.articles.submittingNew ? "Submitting..." : "Submit"}
             </button>
           </form>
         </div>
@@ -61,14 +62,13 @@ class Articles extends Component {
     }
     const rowsOrLoading = this.props.articles.hasReceivedData
       ? rows
-      : 'Loading articles...';
+      : "Loading articles...";
     return (
       <div>
         {content}
         {this.props.articles.errorMessage
           ? <p>{this.props.articles.errorMessage}</p>
-          : rowsOrLoading
-        }
+          : rowsOrLoading}
       </div>
     );
   }
@@ -84,7 +84,7 @@ const mapDispatchToProps = {
   startArticleEdit,
   cancelArticleEdit,
   submitArticleEdit,
-  deleteArticle,
+  deleteArticle
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Articles);
