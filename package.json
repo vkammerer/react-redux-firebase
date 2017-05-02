@@ -1,7 +1,7 @@
 {
   "name": "react-redux-firebase",
   "version": "0.0.1",
-  "description": "A boilerplate using Webpack, React, Redux and Firebase",
+  "description": "An example of using React, Redux and Firebase with Webpack",
   "main": "index.js",
   "scripts": {
     "dev": "node_modules/.bin/webpack-dev-server --content-base static",
