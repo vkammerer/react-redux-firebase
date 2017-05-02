@@ -7,22 +7,22 @@ const Auth = props => {
   switch (props.auth.status) {
     case C.AUTH_LOGGED_IN:
       return (
-        <div>
+        <p>
           <span>Logged in as {props.auth.username}.</span>
           {" "}<button onClick={props.logoutUser}>Log out</button>
-        </div>
+        </p>
       );
     case C.AUTH_AWAITING_RESPONSE:
       return (
-        <div>
+        <p>
           <button disabled>authenticating...</button>
-        </div>
+        </p>
       );
     default:
       return (
-        <div>
+        <p>
           <button onClick={props.openAuth}>Log in</button>
-        </div>
+        </p>
       );
   }
 };
