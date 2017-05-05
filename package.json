@@ -4,8 +4,8 @@
   "description": "An example of using React, Redux and Firebase with Webpack",
   "main": "index.js",
   "scripts": {
-    "dev": "node_modules/.bin/webpack-dev-server --content-base static",
-    "prod": "cross-env NODE_ENV=production node_modules/.bin/webpack --output-filename static/bundle.js"
+    "dev": "node_modules/.bin/webpack-dev-server --content-base docs",
+    "prod": "cross-env NODE_ENV=production node_modules/.bin/webpack --output-filename docs/bundle.js"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

@@ -4043,12 +4043,12 @@ var submitArticle = exports.submitArticle = function submitArticle(content) {
       if (error) {
         dispatch({
           type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
-          error: "Submission failed! " + error
+          error: "Article submission failed! " + error
         });
       } else {
         dispatch({
           type: _constants2.default.FEEDBACK_DISPLAY_MESSAGE,
-          message: "Submission successfully saved!"
+          message: "Article successfully saved!"
         });
       }
     });
@@ -4081,12 +4081,12 @@ var submitArticleEdit = exports.submitArticleEdit = function submitArticleEdit(q
       if (error) {
         dispatch({
           type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
-          error: "Update failed! " + error
+          error: "Article update failed! " + error
         });
       } else {
         dispatch({
           type: _constants2.default.FEEDBACK_DISPLAY_MESSAGE,
-          message: "Update successfully saved!"
+          message: "Article successfully updated!"
         });
       }
     });
@@ -4101,7 +4101,7 @@ var deleteArticle = exports.deleteArticle = function deleteArticle(qid) {
       if (error) {
         dispatch({
           type: _constants2.default.FEEDBACK_DISPLAY_ERROR,
-          error: "Deletion failed! " + error
+          error: "Article deletion failed! " + error
         });
       } else {
         dispatch({
@@ -10457,7 +10457,7 @@ var Article = function (_Component) {
         _react2.default.createElement(
           "span",
           null,
-          this.props.article.username + " said:"
+          this.props.article.username + " said: "
         ),
         this.props.article.content,
         " ",

@@ -33,12 +33,12 @@ export const submitArticle = content => (dispatch, getState) => {
     if (error) {
       dispatch({
         type: C.FEEDBACK_DISPLAY_ERROR,
-        error: `Submission failed! ${error}`
+        error: `Article submission failed! ${error}`
       });
     } else {
       dispatch({
         type: C.FEEDBACK_DISPLAY_MESSAGE,
-        message: "Submission successfully saved!"
+        message: "Article successfully saved!"
       });
     }
   });
@@ -63,12 +63,12 @@ export const submitArticleEdit = (qid, content) => (dispatch, getState) => {
     if (error) {
       dispatch({
         type: C.FEEDBACK_DISPLAY_ERROR,
-        error: `Update failed! ${error}`
+        error: `Article update failed! ${error}`
       });
     } else {
       dispatch({
         type: C.FEEDBACK_DISPLAY_MESSAGE,
-        message: "Update successfully saved!"
+        message: "Article successfully updated!"
       });
     }
   });
@@ -81,7 +81,7 @@ export const deleteArticle = qid => dispatch => {
     if (error) {
       dispatch({
         type: C.FEEDBACK_DISPLAY_ERROR,
-        error: `Deletion failed! ${error}`
+        error: `Article deletion failed! ${error}`
       });
     } else {
       dispatch({
