@@ -6,6 +6,7 @@ const Feedback = props => {
   const rows = props.feedback.map((f, index) => (
     <div key={index}>
       {f.msg}
+      {" "}
       <button onClick={() => props.dismissFeedback(index)}>X</button>
     </div>
   ));

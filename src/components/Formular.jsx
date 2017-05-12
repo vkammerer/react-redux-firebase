@@ -17,6 +17,7 @@ class Formular extends Component {
       ? <form onSubmit={this.submitNewArticle}>
           <p>
             <input ref="newArticle" placeholder="write something clever!" />
+            {" "}
             <button type="submit" disabled={this.props.articles.submittingNew}>
               {this.props.articles.submittingNew ? "Submitting..." : "Submit"}
             </button>

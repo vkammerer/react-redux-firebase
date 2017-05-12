@@ -4016,12 +4016,12 @@ var articlesRef = _firebaseApp.database.ref("articles");
 var listenToArticles = exports.listenToArticles = function listenToArticles() {
   return function (dispatch) {
     return articlesRef.on("value", function (snapshot) {
-      dispatch({
+      return dispatch({
         type: _constants2.default.ARTICLES_RECEIVE_DATA,
         data: snapshot.val()
       });
     }, function (error) {
-      dispatch({
+      return dispatch({
         type: _constants2.default.ARTICLES_RECEIVE_DATA_ERROR,
         message: error.message
       });
@@ -10414,12 +10414,19 @@ var Article = function (_Component) {
         return _react2.default.createElement(
           "form",
           { onSubmit: this.submit },
+          _react2.default.createElement(
+            "span",
+            null,
+            this.props.article.username + " said: "
+          ),
           _react2.default.createElement("input", { ref: "article", defaultValue: this.props.article.content }),
+          " ",
           _react2.default.createElement(
             "button",
             { type: "button", onClick: this.props.cancelArticleEdit },
             "Cancel"
           ),
+          " ",
           _react2.default.createElement(
             "button",
             { type: "submit", onClick: this.submit },
@@ -10444,6 +10451,7 @@ var Article = function (_Component) {
             { onClick: this.props.startArticleEdit },
             "Edit"
           ),
+          " ",
           _react2.default.createElement(
             "button",
             { onClick: this.props.deleteArticle },
@@ -10679,6 +10687,7 @@ var Feedback = function Feedback(props) {
       "div",
       { key: index },
       f.msg,
+      " ",
       _react2.default.createElement(
         "button",
         { onClick: function onClick() {
@@ -10771,6 +10780,7 @@ var Formular = function (_Component) {
           "p",
           null,
           _react2.default.createElement("input", { ref: "newArticle", placeholder: "write something clever!" }),
+          " ",
           _react2.default.createElement(
             "button",
             { type: "submit", disabled: this.props.articles.submittingNew },

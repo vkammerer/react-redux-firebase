@@ -6,18 +6,16 @@ const articlesRef = database.ref("articles");
 export const listenToArticles = () => dispatch =>
   articlesRef.on(
     "value",
-    snapshot => {
+    snapshot =>
       dispatch({
         type: C.ARTICLES_RECEIVE_DATA,
         data: snapshot.val()
-      });
-    },
-    error => {
+      }),
+    error =>
       dispatch({
         type: C.ARTICLES_RECEIVE_DATA_ERROR,
         message: error.message
-      });
-    }
+      })
   );
 
 export const submitArticle = content => (dispatch, getState) => {

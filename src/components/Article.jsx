@@ -12,10 +12,13 @@ class Article extends Component {
     if (this.props.status === C.ARTICLE_EDITING) {
       return (
         <form onSubmit={this.submit}>
+          <span>{`${this.props.article.username} said: `}</span>
           <input ref="article" defaultValue={this.props.article.content} />
+          {" "}
           <button type="button" onClick={this.props.cancelArticleEdit}>
             Cancel
           </button>
+          {" "}
           <button type="submit" onClick={this.submit}>Submit</button>
         </form>
       );
@@ -28,6 +31,7 @@ class Article extends Component {
       button = (
         <span>
           <button onClick={this.props.startArticleEdit}>Edit</button>
+          {" "}
           <button onClick={this.props.deleteArticle}>Delete</button>
         </span>
       );
